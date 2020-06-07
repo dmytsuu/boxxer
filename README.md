@@ -5,7 +5,7 @@ This gem intended to pick containers(boxes, packages, cartons), based on item we
 ## Usage
 
 ```
-gem install boxxer`
+gem install boxxer
 irb
 require 'boxxer'
 ```
