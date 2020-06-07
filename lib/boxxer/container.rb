@@ -1,16 +1,13 @@
 module Boxxer
   class Container
-    attr_reader :dimensions
-    attr_reader :tare_weight
-    attr_reader :net_weight
-    attr_reader :gross_weight
+    attr_reader :dimensions, :tare_weight, :net_weight, :gross_weight
     attr_writer :weights
 
-    def initialize(width:, height:, length:, tare_weight:, limit:)
+    def initialize(width:, height:, length:, tare_weight:, net_limit:)
       @width = width
       @height = height
       @length = length
-      @limit = limit
+      @net_limit = net_limit
       @tare_weight = tare_weight
       @weights = []
     end
@@ -20,15 +17,15 @@ module Boxxer
     end
 
     def net_weight
-      @weights.sum
+      (@weights.sum).truncate(3)
     end
 
     def gross_weight
-      (net_weight + @tare_weight).round(2)
+      (net_weight + @tare_weight).truncate(3)
     end
 
     def fittable?(weight)
-      @limit >= net_weight + weight
+      @net_limit >= net_weight + weight
     end
 
     def add_weight(weight)
