@@ -7,10 +7,10 @@ This gem intended to pick containers(boxes, packages, cartons), based on item we
 ```
 gem install boxxer
 irb
-require 'boxxer'
 ```
 
 ```
+require 'boxxer'
 weights = []
 20.times { weights << rand(0.5..1).round(3) }
 containers = [{ length: 47, width: 38, height: 10, tare_weight: 0.019, net_limit: 0.481 },
