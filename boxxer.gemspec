@@ -6,11 +6,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Dmitry Sivoglaz"]
   spec.email         = ["grayeyed16@gmail.com"]
 
-  spec.summary       = 'Pick and set containers'
+  spec.summary       = 'Picking containers, boxes, cartons, packages based on items weight'
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
-
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
