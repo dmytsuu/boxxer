@@ -4,6 +4,8 @@ This gem intended to pick containers(boxes, packages, cartons), based on item we
 
 ## Usage
 
+`gem install boxxer`
+
 ```
 weights = []
 20.times { weights << rand(0.5..1).round(3) }
