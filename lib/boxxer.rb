@@ -5,7 +5,7 @@ module Boxxer
   class Error < StandardError; end
 
   class Arranger
-    attr_reader :containers, :container_count
+    attr_reader :containers, :container_count, :containers_gross_weight
 
     def initialize(containers:, weights:)
       @available_containers = containers.sort { |container| container[:net_limit] }.reverse
@@ -24,6 +24,10 @@ module Boxxer
     end
 
     private
+
+    def containers_gross_weight
+      @containers.sum(&:gross_weight)
+    end
 
     def container_count
       @containers.count
