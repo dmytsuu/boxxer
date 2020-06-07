@@ -1,6 +1,6 @@
 module Boxxer
   class Container
-    attr_reader :dimensions, :tare_weight, :net_weight, :gross_weight
+    attr_reader :tare_weight, :net_weight, :gross_weight, :weidth, :height, :length
     attr_writer :weights
 
     def initialize(width:, height:, length:, tare_weight:, net_limit:)
@@ -10,10 +10,6 @@ module Boxxer
       @net_limit = net_limit
       @tare_weight = tare_weight
       @weights = []
-    end
-
-    def dimensions
-       { width: width, height: height, length: length }
     end
 
     def net_weight
