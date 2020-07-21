@@ -1,19 +1,21 @@
 require 'boxxer/container'
+require 'pry'
 
 module Boxxer
   class Handler
     attr_reader :containers
 
-    def initialize(containers:, weights:)
+    def initialize(containers:, contents:)
       @available_containers = containers.sort { |container| container[:net_limit] }.reverse
       @largest_container = @available_containers.last
-      @weights = weights.sort.reverse
+      @contents = contents.sort_by { |content| content[:weight] }.reverse
       @containers = []
     end
 
     def call
-      raise Error, "Largest container net_limit is #{@largest_container[:net_limit]}, but maximum weight is #{@weights.max}" if invalid_options?
-      until @weights.empty? do
+      raise Error, "Largest container net_limit is #{@largest_container[:net_limit]}, but maximum weight is #{content_max_weight}" if invalid_options?
+
+      until @contents.empty? do
         container = Container.new(matching_container)
         complete_container(container)
         @containers << container
@@ -37,17 +39,21 @@ module Boxxer
 
     def complete_container(container)
       loop do
-        fittable_weight = @weights.find { |weight| container.fittable?(weight) }
-        fittable_weight.nil? ? break : container.add_weight(@weights.delete_at(@weights.index(fittable_weight)))
+        fittable_conteiner = @contents.find { |content| container.fittable?(content[:weight]) }
+        fittable_conteiner.nil? ? break : container.add_content(@contents.delete_at(@contents.index(fittable_conteiner)))
       end
     end
 
+    def content_max_weight
+      @contents.max { |c| c[:weight] }
+    end
+
     def invalid_options?
-      @weights.max > @largest_container[:net_limit]
+      content_max_weight[:weight] > @largest_container[:net_limit]
     end
 
     def matching_container
-      @available_containers.find { |container| container[:net_limit] >= @weights.sum } || @largest_container
+      @available_containers.find { |container| container[:net_limit] >= @contents.sum { |content| content[:weight] } } || @largest_container
     end
   end
 end
