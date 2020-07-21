@@ -1,5 +1,4 @@
 require 'boxxer/container'
-require 'pry'
 
 module Boxxer
   class Handler
