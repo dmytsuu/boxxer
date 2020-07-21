@@ -5,7 +5,7 @@ module Boxxer
     attr_reader :containers
 
     def initialize(containers:, contents:)
-      @available_containers = containers.sort { |container| container[:net_limit] }.reverse
+      @available_containers = containers.sort_by { |container| container[:net_limit] }
       @largest_container = @available_containers.last
       @contents = contents.sort_by { |content| content[:weight] }.reverse
       @containers = []
