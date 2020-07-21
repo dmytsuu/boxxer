@@ -38,8 +38,8 @@ module Boxxer
 
     def complete_container(container)
       loop do
-        fittable_conteiner = @contents.find { |content| container.fittable?(content[:weight]) }
-        fittable_conteiner.nil? ? break : container.add_content(@contents.delete_at(@contents.index(fittable_conteiner)))
+        fittable_content = @contents.find { |content| container.fittable?(content[:weight]) }
+        fittable_content.nil? ? break : container.add_content(@contents.delete_at(@contents.index(fittable_content)))
       end
     end
 
